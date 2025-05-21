@@ -1,5 +1,7 @@
 # Yoga Pose Image Generator
 
+> **Note:** Currently, OpenAI DALL-E is the only image generation API that has been fully tested with this application. Support for Ideogram and Stability AI is included but has not been extensively validated.
+
 This application automatically generates AI images for yoga poses based on data from a Google Sheet and inserts the images back into the sheet.
 
 ## Features
@@ -29,7 +31,7 @@ Pillow>=10.0.0
    - Create a project in the [Google Cloud Console](https://console.cloud.google.com/)
    - Enable the Google Sheets API and Google Drive API
    - Create OAuth 2.0 credentials (Desktop application)
-   - Download the credentials JSON file and save it as `credentials.json` in the project directory
+   - Download the credentials JSON file and save it as `service_account.json` in the project directory
 
 2. **Image Generation API** (choose one or more):
    - **OpenAI DALL-E**: Get an API key from [OpenAI](https://platform.openai.com/)
@@ -49,21 +51,19 @@ Pillow>=10.0.0
    IDEOGRAM_API_KEY=your_ideogram_api_key
    STABILITY_API_KEY=your_stability_api_key
    ```
-4. Place your Google API credentials file (`credentials.json`) in the project directory
+4. Place your Google API service account file (`service_account.json`) in the project directory
 
 ## Usage
 
 Run the script using the following command:
 
 ```
-python yoga_image_generator.py --sheet_id YOUR_SHEET_ID --api ideogram
+python main.py --sheet_id YOUR_SHEET_ID --api ideogram
 ```
 
 Arguments:
 - `--sheet_id`: The ID of your Google Sheet (from the URL)
 - `--api`: The AI image generation API to use (openai, ideogram, or stability)
-
-On first run, the script will open a browser window for Google OAuth authentication.
 
 ## Expected Sheet Format
 
@@ -76,7 +76,7 @@ The script expects a Google Sheet with the following columns:
 
 ## How It Works
 
-1. The script authenticates with Google APIs
+1. The script authenticates with Google APIs using a service account
 2. Reads yoga pose data from the specified Google Sheet
 3. For each pose:
    - Crafts an optimized prompt based on style, background color, theme, and pose name
@@ -101,8 +101,5 @@ The script includes comprehensive error handling and logging for:
 
 - API rate limits may affect processing speed
 - Image quality depends on the selected API and prompt engineering
-- First-time setup requires Google OAuth authentication
+- Service account must have appropriate access to the Google Sheet and Drive
 
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.

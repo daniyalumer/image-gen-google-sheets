@@ -20,18 +20,14 @@ import os
 import io
 import base64
 import time
-import json
 import argparse
-from urllib.parse import urlparse
 import logging
-from typing import List, Dict, Any, Tuple, Optional
-
 import requests
 from dotenv import load_dotenv
-from PIL import Image
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseUpload
+from typing import List, Dict, Any, Optional
 
 # Configure logging
 logging.basicConfig(

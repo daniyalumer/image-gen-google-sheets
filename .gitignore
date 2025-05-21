@@ -1,0 +1,19 @@
+# Environment variables
+.env
+
+# Google API credentials
+service_account.json
+
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# IDE files
+.vscode/
+.idea/
+.DS_Store
